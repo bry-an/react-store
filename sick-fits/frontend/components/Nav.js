@@ -6,8 +6,6 @@ const Nav = () => (
         </Link>
         <Link href='/'>
         <a>Home!</a></Link>
-
-
     </div>
 )
 
