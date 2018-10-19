@@ -1,11 +1,11 @@
-const Winston = props => {
+const Sell = props => {
     return (
         <div>
             <p>
-                Hey, Winston
+                Sell somthing
             </p>
         </div>
     )
 }
 
-export default Winston
+export default Sell
