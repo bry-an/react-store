@@ -68,7 +68,8 @@ class CreateItem extends Component {
     }
     render() {
         return (
-            <Mutation mutation={CREATE_ITEM_MUTATION}
+            <Mutation 
+                mutation={CREATE_ITEM_MUTATION}
                 variables={this.state}>
                 {(createItem, { loading, error }) => (
                     <Form onSubmit={async (e) => {
