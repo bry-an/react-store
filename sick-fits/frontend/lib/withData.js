@@ -1,5 +1,5 @@
-import withApollo from 'next-with-apollo';
-import ApolloClient from 'apollo-boost';
+import withApollo from 'next-with-apollo'; //high-order compent that will expose apollo client via prop --> w/next
+import ApolloClient from 'apollo-boost'; //package put out by Apollo, includes standard things you'd want
 import { endpoint } from '../config';
 
 function createClient({ headers }) {
