@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/bryan-yunis/rocky-mtn-cyclery/dev
-# timestamp: Sun Oct 21 2018 21:21:23 GMT-0600 (Mountain Daylight Time)
+# timestamp: Mon Oct 22 2018 22:14:11 GMT-0600 (Mountain Daylight Time)
 
 type AggregateItem {
   count: Int!
@@ -797,4 +797,5 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
+  email: String
 }
