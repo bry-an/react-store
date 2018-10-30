@@ -24,6 +24,7 @@ type Query {
     item(where: ItemWhereUniqueInput!): Item
     itemsConnection(where: ItemWhereInput): ItemConnection!
     me: User
+    users: [User]!
 }
 
 # it's important to redefine User in frontend WITHOUT password reset fields so frontend has no access
