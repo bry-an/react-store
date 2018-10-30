@@ -7,11 +7,21 @@ const { transport, makeANiceEmail } = require('../mail')
 const Mutations = {
     async createItem(parent, args, ctx, info) {
         //TODO: check if they are logged in
+        if(!ctx.request.userId) {
+            throw new Error('You must be logged in to do this.')
+        }
+        console.log(ctx.request.userId)
         //async: ctx.db.mutation.createItem returns a promise, 
         //and if want item to go into const item
 
         const item = await ctx.db.mutation.createItem({
             data: {
+                //how to create a relationship in GQL between item and user
+                user: {
+                    connect: {
+                        id: ctx.request.userId,
+                    }
+                },
                 ...args
             }
         }, info)
