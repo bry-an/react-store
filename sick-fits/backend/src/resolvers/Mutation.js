@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const { randomBytes } = require("crypto");
 const { promisify } = require("util");
 const { transport, makeANiceEmail } = require("../mail");
-const { hasPermission } = require('../utils')
+const { hasPermission } = require("../utils");
 
 const Mutations = {
   async createItem(parent, args, ctx, info) {
@@ -48,17 +48,17 @@ const Mutations = {
     );
   },
   async deleteItem(parent, args, ctx, info) {
-      //if they don't have access, catch the error in frontend
+    //if they don't have access, catch the error in frontend
     const where = { id: args.id };
     //find the item
     const item = await ctx.db.query.item({ where }, `{id title user { id }}`);
     //check if they own that item, or have permish
-    const ownsItem = item.user.id === ctx.request.userId
-    const hasPermissions = ctx.request.user.permissions.some(
-        (permission => ['ADMIN', 'ITEMDELETE'].includes (permission))
-    )
+    const ownsItem = item.user.id === ctx.request.userId;
+    const hasPermissions = ctx.request.user.permissions.some(permission =>
+      ["ADMIN", "ITEMDELETE"].includes(permission)
+    );
     if (!ownsItem || !hasPermissions) {
-        throw new Error('You don\'t have permission to do this')
+      throw new Error("You don't have permission to do this");
     }
     //delete
     return ctx.db.mutation.deleteItem({ where }, info); //info: what to return
@@ -200,19 +200,56 @@ const Mutations = {
       info
     );
     //check if they have permission to do this
-    hasPermission(currentUser, ['ADMIN', 'PERMISSIONUPDATE'])
+    hasPermission(currentUser, ["ADMIN", "PERMISSIONUPDATE"]);
     //update permissions
-    return ctx.db.mutation.updateUser({
+    return ctx.db.mutation.updateUser(
+      {
         data: {
-            permissions: {
-                set: args.permissions //because we're using our own enum
-            }
-        }, 
-        where: {
-            id: args.userId
+          permissions: {
+            set: args.permissions //because we're using our own enum
+          }
         },
-    }, info)
-
+        where: {
+          id: args.userId
+        }
+      },
+      info
+    );
+  }, 
+  async addToCart(parent, args, ctx, info) {
+      // make sure the user is signed in
+      const { userId } = ctx.request
+      if (!userId) {
+          throw new Error('You must be signed in')
+      }
+      // Query the user's current cart
+      const [existingCartItem] = await ctx.db.query.cartItems({ //ItemS plural gives us much more search queries, see generated schemas
+        where: {
+        user: { id: userId}, 
+        item: { id: args.id}, 
+        }
+        
+      })
+    //   console.log('eci', existingCartItem)
+      // check if that item is already in their cart and inc++ if it is
+      if(existingCartItem) {
+          console.log('this item is already in the cart')
+          return ctx.db.mutation.updateCartItem({
+              where: { id: existingCartItem.id}, 
+              data: { quantity: existingCartItem.quantity + 1}
+          }, info)
+      }
+      // if not, crate a fresh cart item for that user
+      return ctx.db.mutation.createCartItem({
+          data: {
+              user: {
+                  connect: { id: userId },  //relationship in prisma
+              }, 
+              item: {
+                  connect: { id: args.id}
+              }
+          }
+      }, info)
   }
 };
 
