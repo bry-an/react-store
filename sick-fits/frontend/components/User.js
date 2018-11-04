@@ -9,6 +9,10 @@ query {
         email
         name
         permissions
+        cart {
+            id
+            quantity
+        }
     }
 }
 
