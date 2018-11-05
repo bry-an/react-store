@@ -30,14 +30,14 @@ const Cart = () => (
         <Mutation mutation={TOGGLE_CART_MUTATION}>
           {toggleCart => (
             <Query query={LOCAL_STATE_QUERY}>
-              {({ data }) => (
+              {({ data }) => {
                 <CartStyles open={data.cartOpen}>
                   <header>
                     <CloseButton onClick={toggleCart} title="close">
                       &times;
                     </CloseButton>
                     <Supreme>{me.name}'s Cart</Supreme>
-                    <p>You have __ items in your cart</p>
+                    <p>You have {me.cart.length} item{me.cart.length===1 ? '': 's'} in your cart</p>
                   </header>
 
                   <footer>
@@ -45,7 +45,7 @@ const Cart = () => (
                     <SickButton>Checkout</SickButton>
                   </footer>
                 </CartStyles>
-              )}
+               }}
             </Query>
           )}
         </Mutation>
