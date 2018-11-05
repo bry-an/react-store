@@ -37,9 +37,8 @@ const Cart = () => (
                       &times;
                     </CloseButton>
                     <Supreme>{me.name}'s Cart</Supreme>
-                    <p>You have {me.cart.length} item{me.cart.length===1 ? '': 's'} in your cart</p>
+                    <p>You have {me.cart.length} item{me.cart.length === 1 ? '' : 's'} in your cart</p>
                   </header>
-
                   <footer>
                     <p>$10.10</p>
                     <SickButton>Checkout</SickButton>
