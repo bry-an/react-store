@@ -12,6 +12,13 @@ query {
         cart {
             id
             quantity
+            item {
+                id
+                price
+                image
+                title
+                description
+            }
         }
     }
 }
