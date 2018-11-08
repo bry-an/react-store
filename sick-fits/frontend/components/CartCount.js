@@ -7,7 +7,7 @@ const AnimationStyles = styled.span`
     .count {
         display: block;
         position: relative;
-        transition: all 4s;
+        transition: all 0.4s;
         backface-visibility: hidden;
     }
     /* Initial state of the entered Dot will be flipped on its back */
@@ -49,7 +49,7 @@ const CartCount = ({ count }) => (
         className="count"
         classNames="count"
         key={count}
-        timeout={{ enter: 4000, exit: 4000 }}
+        timeout={{ enter: 400, exit: 4000 }}
       >
         <Dot>{count}</Dot>
       </CSSTransition>
