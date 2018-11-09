@@ -14,6 +14,8 @@ const AnimationStyles = styled.span`
     /* Initial state of the entered Dot will be flipped on its back */
     .count-enter {
         transform: rotateX(0.5turn);
+        background: blue;
+
 
     }
     .count-enter-active {
