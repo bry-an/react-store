@@ -24,7 +24,7 @@ const AnimationStyles = styled.span`
         transform: rotateX(0);
     }
     .count-exit-active {
-        transform: rotateX(0.5turn);
+        transform: scale(4) rotateX(0.5turn);
     }
 `;
 
@@ -49,7 +49,7 @@ const CartCount = ({ count }) => (
         className="count"
         classNames="count"
         key={count}
-        timeout={{ enter: 400, exit: 4000 }}
+        timeout={{ enter: 400, exit: 400 }}
       >
         <Dot>{count}</Dot>
       </CSSTransition>
