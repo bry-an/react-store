@@ -28,7 +28,6 @@ class AutoComplete extends React.Component {
         loading: false,
     }
     onChange = debounce(async (e, client) => {
-        console.log('searching')
         // turn loading on 
         this.setState({ loading: true })
         // manually query apollo client
@@ -52,7 +51,10 @@ class AutoComplete extends React.Component {
             }} />}
           </ApolloConsumer>
           <DropDown>
-            <p>Items will go here</p>
+              {this.state.items.map(item => <DropDownItem key={item.key}>
+                  <img sidth='50' src={item.image} alt={item.title} />
+                  {item.title}
+              </DropDownItem>)}
           </DropDown>
         </div>
       </SearchStyles>
