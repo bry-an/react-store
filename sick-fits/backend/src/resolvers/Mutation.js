@@ -278,8 +278,27 @@ const Mutations = {
   }, 
   async createOrder(parent, args, ctx, info) {
     // query the current user, make sure they are signed in
-    const user
+    const { userId } = ctx.request;
+    if (!userId) throw new Error('You must be signed in to complete the order')
+    const user = await ctx.db.query.user({ where: { id: userId }},
+    `{
+        id 
+        name 
+        email 
+        cart { 
+          id 
+          quantity 
+          item { 
+            title 
+            price 
+            id 
+            description 
+            image }
+          }}`
+          ) //all this garbage is a manual query of what we want back
     // recalculate total for the price
+    const amount = user.cart.reduce((tally, cartItem) => tally + cartItem.item.price * cartItem.quantity, 0)
+    console.log(`charging for total of ${amount}`)
     // create the stripe charge
     // convert cartItems to orderItems
     // create the order
