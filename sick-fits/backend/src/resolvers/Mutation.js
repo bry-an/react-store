@@ -275,7 +275,18 @@ const Mutations = {
 
       }, info) // info is query coming in from client side
 
+  }, 
+  async createOrder(parent, args, ctx, info) {
+    // query the current user, make sure they are signed in
+    const user
+    // recalculate total for the price
+    // create the stripe charge
+    // convert cartItems to orderItems
+    // create the order
+    // clean up: clear the user's cart, delete cartItems
+    // return the order to the client
   }
+
 
 };
 
