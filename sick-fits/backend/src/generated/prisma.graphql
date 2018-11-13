@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/bryan-yunis/rocky-mtn-cyclery/dev
-# timestamp: Sat Nov 10 2018 20:54:52 GMT-0700 (Mountain Standard Time)
+# timestamp: Mon Nov 12 2018 21:07:19 GMT-0700 (Mountain Standard Time)
 
 type AggregateCartItem {
   count: Int!
@@ -799,7 +799,7 @@ type OrderItem implements Node {
   title: String!
   description: String!
   image: String!
-  largeImage: String!
+  largeImage: String
   price: Int!
   quantity: Int!
   user: User
@@ -819,7 +819,7 @@ input OrderItemCreateInput {
   title: String!
   description: String!
   image: String!
-  largeImage: String!
+  largeImage: String
   price: Int!
   quantity: Int
   user: UserCreateOneInput
@@ -865,7 +865,7 @@ type OrderItemPreviousValues {
   title: String!
   description: String!
   image: String!
-  largeImage: String!
+  largeImage: String
   price: Int!
   quantity: Int!
 }
