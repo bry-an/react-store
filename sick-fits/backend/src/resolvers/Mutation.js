@@ -294,7 +294,8 @@ const Mutations = {
             price 
             id 
             description 
-            image }
+            image
+            largeImage }
           }}`
           ) //all this garbage is a manual query of what we want back
     // recalculate total for the price

@@ -15,7 +15,7 @@ const CREATE_ORDER_MUTATION = gql`
       id
       charge
       total
-      items {
+      item {
         id
         title
       }
@@ -53,7 +53,7 @@ class TakeMyMoney extends React.Component {
                 amount={calcTotalPrice(me.cart)}
                 name="Rocky Cyclery"
                 description={`Order of ${totalItems(me.cart)} items`}
-                image={me.cart[0].item && me.cart[0].item.image}
+                image={me.cart.length && me.cart[0].item && me.cart[0].item.image}
                 stripeKey="pk_test_Ndz0mS9N6nY3h9icasQy89Q6"
                 currency="USD"
                 email={me.email}
