@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/bryan-yunis/rocky-mtn-cyclery/dev
-# timestamp: Mon Nov 12 2018 21:07:19 GMT-0700 (Mountain Standard Time)
+# timestamp: Tue Nov 13 2018 21:56:30 GMT-0700 (Mountain Standard Time)
 
 type AggregateCartItem {
   count: Int!
@@ -764,7 +764,7 @@ type Order implements Node {
   id: ID!
   items(where: OrderItemWhereInput, orderBy: OrderItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [OrderItem!]
   total: Int!
-  user: User
+  user: User!
   charge: String!
 }
 
@@ -782,7 +782,7 @@ input OrderCreateInput {
   total: Int!
   charge: String!
   items: OrderItemCreateManyInput
-  user: UserCreateOneInput
+  user: UserCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -799,7 +799,7 @@ type OrderItem implements Node {
   title: String!
   description: String!
   image: String!
-  largeImage: String
+  largeImage: String!
   price: Int!
   quantity: Int!
   user: User
@@ -819,7 +819,7 @@ input OrderItemCreateInput {
   title: String!
   description: String!
   image: String!
-  largeImage: String
+  largeImage: String!
   price: Int!
   quantity: Int
   user: UserCreateOneInput
@@ -865,7 +865,7 @@ type OrderItemPreviousValues {
   title: String!
   description: String!
   image: String!
-  largeImage: String
+  largeImage: String!
   price: Int!
   quantity: Int!
 }
@@ -1551,7 +1551,7 @@ input OrderUpdateInput {
   total: Int
   charge: String
   items: OrderItemUpdateManyInput
-  user: UserUpdateOneInput
+  user: UserUpdateOneRequiredInput
 }
 
 input OrderUpdateManyMutationInput {
