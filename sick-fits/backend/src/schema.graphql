@@ -29,6 +29,7 @@ type Query {
     itemsConnection(where: ItemWhereInput): ItemConnection!
     me: User
     users: [User]!
+    order: (id: ID!): Order
 }
 
 # it's important to redefine User in frontend WITHOUT password reset fields so frontend has no access
