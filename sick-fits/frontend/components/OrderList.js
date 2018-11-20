@@ -6,7 +6,7 @@ import styled from "styled-components";
 import gql from "graphql-tag";
 import formatMoney from "../lib/formatMoney";
 import OrderItemStyles from "./styles/OrderItemStyles";
-import Error from './ErrorMessage'
+import Error from "./ErrorMessage";
 
 const USER_ORDERS_QUERY = gql`
   query USER_ORDERS_QUERY {
@@ -25,6 +25,11 @@ const USER_ORDERS_QUERY = gql`
     }
   }
 `;
+const OrderUl = styled.ul`
+  display: grid;
+  grid-gap: 4rem;
+  grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+`;
 class OrderList extends Component {
   render() {
     return (
@@ -33,7 +38,25 @@ class OrderList extends Component {
           if (loading) return <p>Loading...</p>;
           if (error) return <Error error={error} />;
           console.log(orders);
-          return <p>You have { orders.length }</p>
+          return (
+            <div>
+              <h2>You have {orders.length} orders</h2>
+              <OrderUl>
+                {orders.map(order => {
+                  <OrderItemStyles>
+                    <Link
+                      href={{
+                        pathname: "./order",
+                        query: { id: order.id }
+                      }}
+                    >
+                      <a>hi</a>
+                    </Link>
+                  </OrderItemStyles>;
+                })}
+              </OrderUl>
+            </div>
+          );
         }}
       </Query>
     );
