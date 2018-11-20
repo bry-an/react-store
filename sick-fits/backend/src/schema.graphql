@@ -30,6 +30,7 @@ type Query {
     me: User
     users: [User]!
     order(id: ID!): Order
+    orders(orderBy: OrderOrderByInput): [Order]!
 }
 
 # it's important to redefine User in frontend WITHOUT password reset fields so frontend has no access
